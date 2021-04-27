@@ -1,0 +1,1 @@
+lessc --js --clean-css src/less/antd.main.less > public/css/antd.css
