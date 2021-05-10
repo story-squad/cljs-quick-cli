@@ -5,7 +5,8 @@
             [syn-antd.list :as list]
             [syn-antd.card :as card]
             [syn-antd.switch :as switch]
-            )
+            [syn-antd.radio :as radio])
+  (:require [syn-antd.icons.delete-outlined :as delete-outlined])
   (:require [quick-cli.app.state :refer [page-state get-strike-value]]
             [quick-cli.app.requests :refer [delete-page]]
             [quick-cli.app.components.pages :refer [render-markdown refresh-pages pages]]))
@@ -29,18 +30,26 @@
 (defn page_component []
   (r/reactify-component pages))
 
-(defn index []
-  [:<>
-   [switch/switch {:checked (@page-state :editing)
-                   :on-click (fn []
-                               (swap! page-state assoc :editing (not (@page-state :editing))))}]
-   [:div {:class "content is-normal container"}
-   [page_component]
-   [list/list {:class "page-list"}
-    (map (fn [p] [:li
-                  {:key ((nth p 1) :id)}
-                  [page-view (nth p 1)]]) (sort-by :ts  #(> %1 %2) (@page-state :pages)))]
 
-      
-   ]])
+(defn index []
+  (let [sort-function (if (= "+" (str (@page-state :sort-order))) #(< %1 %2) #(> %1 %2))]
+    [:<>
+     [delete-outlined/delete-outlined {:class "trash-icon"}]
+     [switch/switch {:class "trash-switch"
+                     :checked (@page-state :editing)
+                     :on-click (fn []
+                                 (swap! page-state assoc :editing (not (@page-state :editing))))} "ok"]
+     [radio/radio-group
+      [radio/radio-button {:value "+"
+                           :on-click (fn []
+                                       (swap! page-state assoc :sort-order "+"))} "asc"]
+      [radio/radio-button {:value "-"
+                           :on-click (fn []
+                                       (swap! page-state assoc :sort-order "-"))} "desc"]]
+     [:div {:class "content is-normal container"}
+      [page_component]
+      [list/list {:class "page-list"}
+       (map (fn [p] [:li
+                     {:key ((nth p 1) :id)}
+                     [page-view (nth p 1)]]) (sort-by #(get-in (val %) [:ts]) sort-function (@page-state :pages)))]]]))
    
