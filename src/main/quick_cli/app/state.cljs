@@ -1,12 +1,15 @@
 (ns quick-cli.app.state
   (:require   [reagent.ratom :as r]
-              [cljs.pprint :as pp]
+              ;; [cljs.pprint :as pp]
               ))
 ;; ---- state ----
 
 (defonce state (r/atom (sorted-map)))
-(defonce page-state (r/atom {:text "" :id "" :pages (sorted-map) :editing false}))
-(defonce path-atom (r/atom {:active "home"}))
+
+(defonce page-state (r/atom {:text "" :id "" 
+                             :pages (sorted-map) 
+                             :editing false :sort-order "+"}))
+
 (defonce strike-atom (r/atom {:pages (hash-map)}))
 
 (defn get-strike-value [id]
@@ -21,10 +24,10 @@
 ;;              (println "---" key "atom changed ---")
 ;;              (pp/pprint new-state)))
 
-(add-watch page-state :pages
-           (fn [key _atom _old-state new-state]
-             (println "---" key "atom changed ---")
-             (pp/pprint new-state)))
+;; (add-watch page-state :pages
+;;            (fn [key _atom _old-state new-state]
+;;              (println "---" key "atom changed ---")
+;;              (pp/pprint new-state)))
 
 ;; (add-watch path-atom :active
 ;;            (fn [key _atom _old-state new-state]
