@@ -1,16 +1,14 @@
 (ns quick-cli.app.components.pages
   (:require-macros [cljs.core.async.macros :refer [go]])
+  (:require [clojure.string :as str])
   (:require [markdown-to-hiccup.core :as m])
   (:require [quick-cli.app.state :refer [set-strike-value get-strike-value]])
   (:require [quick-cli.app.requests :refer [create-page get-pages]])
-  (:require [clojure.string :as s])
   (:require [cljs.core.async :refer [<!]])
   (:require [quick-cli.app.state :refer [page-state]]
             [syn-antd.input :as input]
             [syn-antd.button :as button]
-            [syn-antd.checkbox :as checkbox])
-  (:require [clojure.string :as str]))
-
+            [syn-antd.checkbox :as checkbox]))
 ;; ---- utils ---- 
 (defn strikethrough-md [text]
   (let [lines (str/split text #"\n")
@@ -20,7 +18,7 @@
 (defn sanitize-input
   "removes the element tags from a string"
   [s]
-  (s/replace (s/replace s "<" "") ">" ""))
+  (str/replace (str/replace s "<" "") ">" ""))
 
 (defn refresh-pages []
   (get-pages))
