@@ -12,6 +12,7 @@
   (render))
 
 (defn ^:dev/after-load reload! []
+  ;; todo: refactor to reframe
   (get-users)
   (get-pages)
   (render))
