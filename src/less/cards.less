@@ -1,0 +1,115 @@
+@card-w: 10em;
+@card-h: 12em;
+
+// .drop-shadow {
+//   position: relative;
+//   width: 90%;
+// }
+
+// .drop-shadow:before,
+// .drop-shadow:after {
+//   content: "";
+//   position: absolute;
+//   z-index: -1;
+//   bottom: 15px;
+//   left: 10px;
+//   width: 50%;
+//   height: 20%;
+//   max-width: 300px;
+//   box-shadow :0 15px 10px rgba(0, 0, 0, 0.7);
+//   transform: rotate(-3deg);
+// }
+
+// .drop-shadow:after{
+//   right: 10px;
+//   left: auto;
+//   transform: rotate(3deg);
+// }
+
+.CardFace .ant-card-body {
+  display: flex;
+  padding: 0;
+  justify-content: space-between;
+  background-color: white;
+  color: rgb(20, 34, 34);
+  // border-radius: 0.5rem;
+  margin: 0.5rem;
+  width: @card-w;
+  min-height: @card-h; 
+  max-height: calc(@card-h * 1.5); 
+}
+
+.CardContents {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-content: flex-start;
+  min-height: @card-h;
+  max-height: calc(@card-h * 1.5); 
+  width: @card-w;
+}
+
+.CardSideWays {
+  display: flex;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  letter-spacing: 2px;
+  line-height: 2ch;
+  color: white;
+  flex-direction: row;
+  padding: 0.25rem;
+  height: calc(@card-h * 1.5); 
+  margin-right: 0.2rem;
+  border-radius: 0.25rem;
+  border: 1px solid red;
+  justify-content: space-between;
+  // margin-right: 1rem;
+}
+
+.container .controller-list {
+  // border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+  // .is-selected, .play-button {
+  //   border: 1px solid lightblue;
+  //   // opacity: 10%;
+  // }
+  
+.inner-card {
+    width: @card-w;
+    height: @card-h;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: column;
+}
+
+.keeper {
+  .CardSideWays {
+      background-color: @conifer;
+  }   
+}
+
+.rule {
+  .CardSideWays {
+      background-color: @bright-sun;
+  }   
+}
+
+.action {
+  .CardSideWays {
+      background-color: @kashmir-blue;
+  }   
+}
+
+.goal {
+  .CardSideWays {
+      background-color: @burnt-sienna;
+  }
+}
+
+.input-game-info {
+  display: flex;
+  
+}
