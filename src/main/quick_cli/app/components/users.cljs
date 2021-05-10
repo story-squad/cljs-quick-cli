@@ -16,6 +16,5 @@
 (defn users []
   (let [state (vals @state)]
     [:div.container
-     [:h2 "Users"]
      [:ul.list-group
       (when state (user-list state))]]))
