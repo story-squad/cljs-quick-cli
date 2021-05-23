@@ -2,7 +2,8 @@
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs-http.client :as http]
             [cljs.core.async :refer [<!]])
-  (:require [quick-cli.app.state :refer [add-page-to-state add-user-to-state page-state]]))
+  (:require [quick-cli.app.state :refer [add-page-to-state add-user-to-state]])
+  (:require [re-frame.core :as re-frame]))
 
 (defonce API_BASE_URL "http://localhost:8000")
 
@@ -62,6 +63,5 @@
 (defn delete-page [id]
   (go (let [url (str API_BASE_URL "/pages/" id)
             _ (<! (http/delete url CORS_ALLOW_ORIGIN_ALL))]
-        (reset-vals! page-state {:id "" :text "" :pages (sorted-map) :editing (@page-state :editing)})
+        (re-frame/dispatch [:clear-pages])
         (get-pages))))
-

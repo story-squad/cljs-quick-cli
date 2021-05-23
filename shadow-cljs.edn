@@ -1,9 +1,13 @@
-{:source-paths
- ["src/main"
-  "src/test"]
+{:nrepl {:port 8777}
+
+:jvm-opts ["-Xmx1G"]
+
+ :source-paths
+ ["src"]
  :dependencies
  [[syn-antd "4.13.1"]
   [reagent "1.0.0"]
+  [re-frame "1.2.0"]
   [cljs-http "0.1.46"]
   [markdown-to-hiccup "0.6.2"]
   [binaryage/devtools "1.0.3"]]
